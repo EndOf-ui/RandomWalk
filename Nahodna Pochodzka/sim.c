@@ -285,31 +285,3 @@ bool sim_load_state(Sim *s, const char *path) {
     fclose(f);
     return true;
 }
-
-void sim_print_summary_avg_steps(const Sim *s) {
-    int H = s->WorldHeight, W = s->WorldWidth;
-    printf("Average steps to center (ActRep=%d):\n", s->ActRep);
-    for (int r = 0; r < H; r++) {
-        for (int c = 0; c < W; c++) {
-            int i = idx(s,r,c);
-            if (s->WorldType && s->obstacle[i]) { printf("  X   "); continue; }
-            double avg = (s->ActRep > 0) ? (double)s->steps_sum[i] / (double)s->ActRep : 0.0;
-            printf("%5.1f ", avg);
-        }
-        printf("\n");
-    }
-}
-
-void sim_print_summary_prob_k(const Sim *s) {
-    int H = s->WorldHeight, W = s->WorldWidth;
-    printf("P(reach center within K=%d) (ActRep=%d):\n", s->K, s->ActRep);
-    for (int r = 0; r < H; r++) {
-        for (int c = 0; c < W; c++) {
-            int i = idx(s,r,c);
-            if (s->WorldType && s->obstacle[i]) { printf("  X   "); continue; }
-            double pr = (s->ActRep > 0) ? (double)s->hits_sum[i] / (double)s->ActRep : 0.0;
-            printf("%5.2f ", pr);
-        }
-        printf("\n");
-    }
-}
