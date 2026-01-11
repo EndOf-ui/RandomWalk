@@ -47,7 +47,6 @@ bool sim_run(Sim *s, int addReps, uint64_t seed);
 bool sim_save_state(const Sim *s, const char *path);
 bool sim_load_state(Sim *s, const char *path);
 
-void sim_print_summary_avg_steps(const Sim *s);
-void sim_print_summary_prob_k(const Sim *s);
 
 #endif
+
